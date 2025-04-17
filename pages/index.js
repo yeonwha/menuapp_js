@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <>
       <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-grow container mx-auto px-4 py-8">
+        <div className="container m-6"><Header /></div>
+        <main className="flex justify-center container mx-2 px-4">
           <Form />
         </main>
         <Footer />
