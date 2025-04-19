@@ -1,39 +1,44 @@
-import DangerButton from "../DangerButton";
-import SecondaryButton from "./Buttons/SecondaryButton";
+import DangerButton from "./Buttons/DangerButton";
+import PrimaryButton from "./Buttons/PrimaryButton";
 
 export default function List() {
+    const foodCategory = ["Main", "Dessert", "Drink"];
+
+    const foodList = [
+        {id: 1, category: "Main", name: "Pasta", price: 21.99 },
+        {id: 2, category: "Main", name: "Cheese burger", price: 11.49},
+        {id: 3, category: "Main", name: "Salad", price: 14.99},
+        {id: 4, category: "Dessert", name: "Chocolate icecream", price: 6.99},
+        {id: 5, category: "Dessert", name: "Vanilia cake", price: 8.49},
+        {id: 6, category: "Drink", name: "Zero sprite", price: 3.49},
+        {id: 7, category: "Drink", name: "Ginger ale", price: 3.49},
+        {id: 8, category: "Drink", name: "Cappucino", price: 2.99},
+    ];
+
     return (
         <>
-            <div className="bg-white dark:bg-black dark:text-white overflow-hidden shadow-sm sm:rounded-lg mx-6">
-                <div className="overflow-x-auto">
-                    <table className="min-w-full text-sm text-left rtl:text-right text-black dark:text-white">
-                        <thead className="text-xs text-white bg-black dark:text-white border-b-2 border-white">
-                            <tr className="text-nowrap">
+        <ol>
+            {foodCategory.map((category, index) => (
+                <div key={index}>
+                    <li key={index}>{category}</li>
+                    <table>
+                        <thead >
+                            <tr >
                                 <th className="p-3" name="food_number"></th>
                                 <th className="p-3" name="food_name"></th>
                                 <th className="p-3" name="food_price"></th>
                             </tr>
                         </thead>
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
-                            <tr className="text-nowrap">
-                                <th className="py-3"></th>
-                                <th className="py-3"></th>
-                                <th className="py-3"></th>
-                                <th className="py-3"></th>
-                                <th className="py-3"></th>
-                                <th className="py-3"></th>
-                            </tr>
-                        </thead>
                         <tbody>
-                            {foodList.map((food, index) => (
-                                <tr key={player.id} className="text-black dark:text-white dark:border-white even:bg-blue/20 odd:bg-black">
+                            {foodList.filter((food) => food.category === category).map((selectedFood, index) => (
+                                <tr key={selectedFood.id}>
                                     <td className="px-3 py-2.5">{index + 1}</td>
-                                    <td className="px-3 py-2">{food.name}</td>
-                                    <td className="px-3 py-2">{food.price}</td>
+                                    <td className="px-3 py-2">{selectedFood.name}</td>
+                                    <td className="px-3 py-2">{selectedFood.price}</td>
                                         <td className="px-3 py-2">
-                                            <SecondaryButton className="font-semibold bg-green" onClick={() => editPrice(food)}>
+                                            <PrimaryButton className="font-semibold bg-green" onClick={() => editPrice(food)}>
                                                 Edit
-                                            </SecondaryButton>
+                                            </PrimaryButton>
                                         </td>
                                         <td className="px-3 py-2">
                                             <DangerButton className="font-semibold bg-red" onClick={() => deleteFood(food)}>
@@ -44,8 +49,10 @@ export default function List() {
                             ))}
                         </tbody>
                     </table>
+                    <hr />
                 </div>
-            </div>
+            ))}
+        </ol>
         </>
     )
 }
