@@ -1,20 +1,23 @@
-import DangerButton from "./Buttons/DangerButton";
 import PrimaryButton from "./Buttons/PrimaryButton";
+import DangerButton from "./Buttons/DangerButton";
+import { useEffect } from "react";
 
 export default function List({foodList, setFoodList}) {
     const foodCategory = ["Main", "Dessert", "Drink"];
-
-    function checkHandler(selectedFood) {
-        console.log(selectedFood.checked)
-        // const updatedFoodList = foodList.map((food) => {
-        //     if (food.id === selectedFood.id) {
-        //         food.checked = food.checked ? false : true;
-        //     }
-        // });
-        // setFoodList(updatedFoodList);
-      }
+    function handleClick(selectedFood) {
+        const updatedFoodList = foodList.map(f => {
+            if (f.id === selectedFood.id) {
+                return {
+                    ...f,
+                    checked: !selectedFood.checked,
+                };
+            } else {
+                return f;
+            }
+        })
+        setFoodList(updatedFoodList);
+    }
     
-
     return (
         <>
         <ol>
@@ -33,7 +36,8 @@ export default function List({foodList, setFoodList}) {
                             {foodList.filter((food) => food.category === category).map((selectedFood, index) => (
                                 <tr key={selectedFood.id}>
                                     <td>
-                                        <input type="checkbox" name={selectedFood.name + selectedFood.id} id={index} onChange={checkHandler(selectedFood)}/>
+                                        <input type="checkbox" name={selectedFood.name + selectedFood.id} id={index} 
+                                             onChange={() => handleClick(selectedFood)}/>
                                     </td>
                                     <td className="px-3 py-2">{selectedFood.name}</td>
                                     <td className="px-3 py-2">{selectedFood.price}</td>

@@ -6,7 +6,6 @@ import DiscountSelect from "@/components/DiscountSelect";
 import { useState } from "react"
 
 export default function Home() {
-
   const [foodList, setFoodList] = useState([
     {id: 1, category: "Main", name: "Pasta", price: 21.99, checked: false },
     {id: 2, category: "Main", name: "Cheese burger", price: 11.49, checked: false},
@@ -27,9 +26,9 @@ export default function Home() {
           <Form />
           </div>
           <div className="container my-4">
-          <List key="foodList" foodList={foodList} setFoodList={setFoodList}/>
+          <List key={() => (foodList.length + 1)} foodList={foodList} setFoodList={setFoodList}/>
           </div>
-          <DiscountSelect key="selectedFoodList" foodList={foodList} />
+          <DiscountSelect ket={() => (foodList.length + 1)} foodList={foodList}/>
         </main>
         <Footer />
       </div>
