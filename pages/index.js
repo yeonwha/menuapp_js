@@ -28,7 +28,9 @@ export default function Home() {
           <div className="container my-4">
           <List key={() => (foodList.length + 1)} foodList={foodList} setFoodList={setFoodList}/>
           </div>
+          <div className="flex justify-center">
           <DiscountSelect ket={() => (foodList.length + 1)} foodList={foodList}/>
+          </div>
         </main>
         <Footer />
       </div>

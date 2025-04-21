@@ -22,8 +22,8 @@ export default function List({foodList, setFoodList}) {
         <>
         <ol>
             {foodCategory.map((category, index) => (
-                <div key={index}>
-                    <li key={index}>{category}</li>
+                <div key={index} className="my-6 mx-8">
+                    <li key={index} className="text-lg font-medium text-gray-900">{category}</li>
                     <table>
                         <thead >
                             <tr >
