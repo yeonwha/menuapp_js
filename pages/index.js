@@ -25,7 +25,7 @@ export default function Home() {
           <div className="flex justify-center">
           <Form />
           </div>
-          <div className="container my-4">
+          <div className="container my-4 flex justify-center">
           <List key={() => (foodList.length + 1)} foodList={foodList} setFoodList={setFoodList}/>
           </div>
           <div className="flex justify-center">

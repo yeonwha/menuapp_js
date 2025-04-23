@@ -1,6 +1,5 @@
 import PrimaryButton from "./Buttons/PrimaryButton";
 import DangerButton from "./Buttons/DangerButton";
-import { useEffect } from "react";
 
 export default function List({foodList, setFoodList}) {
     const foodCategory = ["Main", "Dessert", "Drink"];
@@ -55,7 +54,7 @@ export default function List({foodList, setFoodList}) {
                             ))}
                         </tbody>
                     </table>
-                    <hr />
+                    <hr className="w-160 h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
                 </div>
             ))}
         </ol>
