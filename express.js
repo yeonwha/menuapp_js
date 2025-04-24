@@ -5,6 +5,8 @@ import compression from 'compression';     // server can accept compressed file
 import morgan from 'morgan';     // data logger to log responese and request in the console
 import cors from 'cors';         // enables CORS for API from different domain, protocol, port access API
 
+import router from './menuapp-api/docs/routes/api-router.js';
+
 const app = express();
 
 // Express middleware
@@ -20,5 +22,8 @@ app.use(cors());
 app.get('/', (req, res) => {
     res.send('Node.js Server is live!');
 });
+
+// Callback to any HTTP requests
+app.use('/m1', router);
 
 export default app;
