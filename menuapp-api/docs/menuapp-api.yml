@@ -18,7 +18,7 @@ components:
           type: string
           minLength: 2
           maxLength: 15
-          pattern: "^[A-Za-z0-9_]+$"
+          pattern: "^[A-Za-z0-9 ]+$"
           description: Name of the food created
           example: Cheese Burger
         price:

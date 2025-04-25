@@ -11,7 +11,7 @@ const foodSchema = yup.object().shape({
         .trim()
         .min(2, 'Food nmae must be at least ${min} characters')
         .max(15, 'Food nmae cannot be more than ${max} characters')
-        .matches(/^[A-Za-z0-9_]+$/, 'Invalid nmae. Use upper or lower case letters, 0 to 9, or underscore only.')
+        .matches(/^[A-Za-z0-9 ]+$/, 'Invalid name. Use upper or lower case letters, 0 to 9, or whitespace only.')
         .required('Food name is required.'),
     price: yup
         .number()
