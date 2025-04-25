@@ -1,3 +1,5 @@
+# Display Menu App
+
 Displaying menu app is a single page web application to manage the menu of restaurant using Next.js. 
 The backend and database are implemented with Express and MongoDB.
 The frontend is implemented with React and Tailwind.
@@ -7,7 +9,12 @@ The base project is a console program in C++.
 <a href="https://github.com/yeonwha/Menu.git">Link</a>
 
 
-## Getting Started
+## Build Environment
+
+    - Complier: Visual Studio Code
+    - Framework: Node.js, React, Next.js @latest
+
+## How to run
 
 First, run the development server:
 
