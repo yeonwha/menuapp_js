@@ -28,7 +28,13 @@ const addNewFood = async (req, res) => {
         //res.status(200).send('Successful API POST request');
         let food = await foodSchema.validate(req.body);
         foodId++;
-        const newFood = {id: foodId, category: food.category, name: food.name, price: food.price, checked: false}
+        const newFood = {
+            id: foodId, 
+            category: food.category, 
+            name: food.name, 
+            price: food.price, 
+            checked: false
+        };
         foodList.push(newFood);
         console.log(foodList);
         res.status(201).send(newFood);

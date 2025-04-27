@@ -3,6 +3,7 @@ import DangerButton from "./Buttons/DangerButton";
 
 export default function List({foodList, setFoodList}) {
     const foodCategory = ["Main", "Dessert", "Drink"];
+    
     function handleClick(selectedFood) {
         const updatedFoodList = foodList.map(f => {
             if (f.id === selectedFood.id) {
