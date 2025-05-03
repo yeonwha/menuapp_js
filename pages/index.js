@@ -33,7 +33,7 @@ export default function Home({ jsonData }) {
         <div className="container m-6"><Header /></div>
         <main className="inline-block justify-center container mx-8 px-4">
           <div className="flex justify-center">
-          <Form />
+          <Form key={() => (foodList.length + 1)}foodList={foodList} setFoodList={setFoodList}/>
           </div>
           <div className="container my-4 flex justify-center">
           <List key={() => (foodList.length + 1)} foodList={foodList} setFoodList={setFoodList}/>

@@ -25,7 +25,6 @@ var foodId = foodList.length;
 // POST request handler
 const addNewFood = async (req, res) => {
     try {
-        //res.status(200).send('Successful API POST request');
         let food = await foodSchema.validate(req.body);
         foodId++;
         const newFood = {

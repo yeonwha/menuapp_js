@@ -1,20 +1,18 @@
 import PrimaryButton from "./Buttons/PrimaryButton"
+import addNewFood from "./Functions/addNewFood";
 
-export default function Form() {
-    function addNewFood(formData){
-        const newFood = {
-            "category": formData.get("category"),
-            "name": formData.get("food_name"), 
-            "price": formData.get("food_price")
-        }
-        
-        console.log(newFood);
+export default function Form({ foodList, setFoodList }) {
+    function handleSumbit(e) {
+        e.preventDefault();
+        const form = e.target; 
+        const formData = new FormData(form);
+        addNewFood(formData, setFoodList);
     }
 
     return(
     <>
     <div className="food_add_form border-2 border-gray-200 rounded-lg p-6 max-w-4xl mx-2 items-center">
-        <form action={addNewFood} className="food_form">
+        <form id="form" onSubmit={ handleSumbit } className="food_form">
             <h2 className="text-xl font-bold text-center mb-6">Add Food Menu</h2>
             <div className="grid grid-cols-2 gap-6">
                 {/* Food category select form */}
@@ -28,7 +26,7 @@ export default function Form() {
                     </select>
                 </div>
                 {/* Food image upload */}
-                <div>
+                {/* <div>
                     <label className="block mb-2 text-lg font-medium text-gray-900" htmlFor="file_input">Image</label>
                     <div className="flex items-center">
                         <input className="hidden" id="file_input" type="file" />
@@ -37,15 +35,27 @@ export default function Form() {
                         </label>
                         <span className="ml-4 text-gray-500">No file chosen</span>
                     </div>
-                </div>
+                </div> */}
             </div>
             {/* Food name */}
             <div className="w-full max-w-96 mb-6 mt-4">
-                <input type="text" id="food_name" name="food_name" className="bg-white border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Food name" />
+                <input 
+                    type="text" 
+                    id="food_name" 
+                    name="food_name" 
+                    className="bg-white border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                    placeholder="Food name"
+                 />
             </div>
             {/* Food price */}
             <div className="w-full max-w-96 mb-6">
-                <input type="text" id="food_price" name="food_price" className="bg-white border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Food price" />
+                <input 
+                    type="text" 
+                    id="food_price" 
+                    name="food_price" 
+                    className="bg-white border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                    placeholder="Food price"
+                />
             </div>
             {/* Add button */}
             <div className="flex justify-end">
