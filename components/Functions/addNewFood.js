@@ -11,7 +11,6 @@ export default async function addNewFood( formData , setFoodList ) {
         console.log("newFood:", newFood);
         await axios.post('http://192.168.0.14:3004/m1/menu', newFood);
         const updatedFoodList = await axios.get('http://192.168.0.14:3004/m1/menu');
-        console.log(updatedFoodList.data);
         setFoodList(updatedFoodList.data);
     }
     catch (err) {

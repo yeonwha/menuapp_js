@@ -1,7 +1,7 @@
 import PrimaryButton from "./Buttons/PrimaryButton"
 import addNewFood from "./Functions/addNewFood";
 
-export default function Form({ foodList, setFoodList }) {
+export default function Form({ setFoodList }) {
     function handleSumbit(e) {
         e.preventDefault();
         const form = e.target; 
