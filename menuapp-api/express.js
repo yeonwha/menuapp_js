@@ -1,3 +1,6 @@
+// MongoDB connection via mongoose
+import './db.js';
+
 // Middleware from mode_modules/
 import express from 'express';   // express
 import cookieParser from 'cookie-parser';  // express uses to parse HTTP cookies in Request
@@ -25,5 +28,5 @@ app.get('/', (req, res) => {
 
 // Callback to any HTTP requests
 app.use('/m1', router);
-
+  
 export default app;

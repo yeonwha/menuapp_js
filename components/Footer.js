@@ -1,5 +1,6 @@
-//import { CURRENT_YEAR } from '@/constants'
-
+/**
+ * Footer
+ */
 export default function Footer() {
   return (
     <footer className='mt-12'>

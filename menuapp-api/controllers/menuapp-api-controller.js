@@ -1,5 +1,6 @@
 import foodSchema from "../models/food-schema.js";
 
+// Initial temporary data to send to the frontend (before database setup)
 const foodList = [
     {id: 1, category: "Main", name: "Pasta", price: 21.99, checked: false },
     {id: 2, category: "Main", name: "Cheese burger", price: 11.49, checked: false},
@@ -35,7 +36,6 @@ const addNewFood = async (req, res) => {
             checked: false
         };
         foodList.push(newFood);
-        console.log(foodList);
         res.status(201).send(newFood);
     } 
     catch (err) {
@@ -44,4 +44,21 @@ const addNewFood = async (req, res) => {
     };
 };
 
-export { getAllFoods, addNewFood };
+// PATCH (will be revised)
+const editPrice = async (req, res) => {
+    try {
+        let food = await foodSchema.validate(req.body);
+        console.log(food);
+        for (f in foodList) {
+            if (f.id === food.id) {
+                f.price = food.price;
+            }
+        }
+        res.status(204).send(food);
+    }
+    catch (err){
+        res.status(400).send('Bad request');
+    }
+}
+
+export { getAllFoods, addNewFood , editPrice };

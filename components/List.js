@@ -3,6 +3,13 @@ import DangerButton from "./Buttons/DangerButton";
 import { useState } from "react"; 
 import EditForm from "./EditForm";
 
+/**
+ * Showing the FoodList according to foodList, and update it with setFoodList.
+ * Open the price edit form once a certain food item is selected for PATCH (will be implemented later).
+ * @param foodList
+ * @param setFoodList
+ * @returns: All the food items on the list.
+ */
 export default function List({foodList, setFoodList}) {
     // Three food categories
     const foodCategory = ["Main", "Dessert", "Drink"];
@@ -24,15 +31,19 @@ export default function List({foodList, setFoodList}) {
         setFoodList(updatedFoodList);
     }
 
-    const [openModal, setOpenModal] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
+    const [openEditForm, setOpenEditForm] = useState(false);    // EDIT button check hook
+    const [selectedItem, setSelectedItem] = useState(null);     // selected food set hook
+    
+    // An EDIT button is clicked, set the selectedFood, and open the price edit form
     const handleOpen = (selectedFood) => {
         setSelectedItem(selectedFood);
-        setOpenModal(!openModal);
+        setOpenEditForm(!openEditForm);
     }
+    // Close the price edit form
     const handleClose = () => {
-        setOpenModal(false);
+        setOpenEditForm(false);
     }
+
     return (
         <>
         <ol>
@@ -63,7 +74,8 @@ export default function List({foodList, setFoodList}) {
                                             >
                                                 Edit
                                             </PrimaryButton>
-                                            {openModal && (selectedFood === selectedItem) && (<EditForm key="edit_price_form" selectedItem={selectedItem} handleClose={handleClose}/>)}
+                                            {openEditForm && (selectedFood === selectedItem) && 
+                                                (<EditForm key="edit_price_form" selectedItem={selectedItem} handleClose={handleClose} setFoodList={setFoodList}/>)}
                                         </td>
                                         <td className="px-3 py-2">
                                             <DangerButton onClick={() => deleteFood(selectedFood)}>

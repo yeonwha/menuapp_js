@@ -1,3 +1,7 @@
+/**
+ * 
+ * @returns Header for the title
+ */
 export default function Header() {
     return (
       <header className='border-b border-gray-200 mx-8 mb-4 pb-2'>

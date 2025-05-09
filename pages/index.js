@@ -6,7 +6,7 @@ import DiscountSelect from "@/components/DiscountSelect";
 import { useState } from "react"
 import axios from 'axios';
 
-// Static Generation pre- rendering at build time
+// Static data generation pre-rendering at build time
 export async function getStaticProps(){
   let jsonData;
 
@@ -25,7 +25,7 @@ export async function getStaticProps(){
 }
 
 export default function Home({ jsonData }) {
-  const [foodList, setFoodList] = useState(jsonData);
+  const [foodList, setFoodList] = useState(jsonData);   // Menu list hook
 
   return (
     <>

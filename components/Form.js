@@ -1,11 +1,19 @@
 import PrimaryButton from "./Buttons/PrimaryButton"
 import addNewFood from "./Functions/addNewFood";
 
+/**
+ * Food create form.
+ * handleSumit function will process the event once the ADD button is clicked,
+ * then send the data to addNewFood function to post it.
+ * @param setFoodList - Foodlist hook to send together
+ * @returns - the form
+ */
 export default function Form({ setFoodList }) {
     function handleSumbit(e) {
         e.preventDefault();
         const form = e.target; 
         const formData = new FormData(form);
+        console.log(formData);
         addNewFood(formData, setFoodList);
     }
 
