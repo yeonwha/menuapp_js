@@ -16,7 +16,14 @@ The base project is a console program in C++.
 
 ## How to run
 
-First, run the development server:
+First, run the frontend on the root directory(menuapp_js/):
+
+```bash
+npm run dev
+```
+
+Second, 
+run the development server on the menuapp-api(menuapp_js/menuapp-api/) directory:
 
 ```bash
 npm run dev
