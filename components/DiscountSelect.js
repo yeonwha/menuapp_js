@@ -4,7 +4,7 @@
     return(
     <>
     <div className="food_add_form border-2 border-gray-200 rounded-lg p-6 max-w-4xl mx-2 items-center">
-        <h2 className="text-xl font-bold text-center mb-6">Discount Apply</h2>
+        <h2 className="text-xl font-bold text-center mb-6">Apply Discount</h2>
         <div className="grid grid-cols-2 gap-6">
             {/*Selected Food*/}
             <div className="mb-4">

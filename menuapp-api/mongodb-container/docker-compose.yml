@@ -1,0 +1,38 @@
+# services:
+#   mongodb_service:
+#     image: mongo
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - ./data:/data/db
+#       - ./seed.js:/docker-entrypoint-initdb.d/seed.js
+
+
+services:
+  mongodb_service:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+    networks:
+      - app-network
+
+  data-seeder:
+    image: node:18
+    volumes:
+      - ./seed.js:/app/seed.js:ro 
+      - ../package.json:/app/package.json
+      - ../package-lock.json:/app/package-lock.json
+    working_dir: /app
+    environment:
+      MONGO_URI: mongodb://mongodb_service:27017/menu_db
+      MONGO_DB: menu_db
+    depends_on:
+      - mongodb_service
+    networks:
+      - app-network
+    command: sh -c "cd /app && npm install && ls -l node_modules/mongodb && node seed.js"
+
+networks:
+  app-network:

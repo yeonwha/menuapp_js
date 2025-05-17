@@ -4,14 +4,13 @@ import { useState } from "react";
 import EditForm from "./EditForm";
 
 /**
- * Showing the FoodList according to foodList, and update it with setFoodList.
+ * Render the array items in passed foodList, and update the list with setFoodList hook.
  * Open the price edit form once a certain food item is selected for PATCH (will be implemented later).
  * @param foodList
  * @param setFoodList
  * @returns: All the food items on the list.
  */
 export default function List({foodList, setFoodList}) {
-    // Three food categories
     const foodCategory = ["Main", "Dessert", "Drink"];
     
     // Handle checkbox onclick to show what food items are selected.
@@ -34,12 +33,11 @@ export default function List({foodList, setFoodList}) {
     const [openEditForm, setOpenEditForm] = useState(false);    // EDIT button check hook
     const [selectedItem, setSelectedItem] = useState(null);     // selected food set hook
     
-    // An EDIT button is clicked, set the selectedFood, and open the price edit form
     const handleOpen = (selectedFood) => {
         setSelectedItem(selectedFood);
         setOpenEditForm(!openEditForm);
     }
-    // Close the price edit form
+
     const handleClose = () => {
         setOpenEditForm(false);
     }

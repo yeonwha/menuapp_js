@@ -6,7 +6,6 @@ const router = express.Router();
 router.route('/menu')
 .get(getAllFoods)
 .post(addNewFood)
-.patch(editPrice)
 
 // router.route('/menu/:foodId')
 // .patch(editPrice)

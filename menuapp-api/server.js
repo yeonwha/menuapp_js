@@ -2,7 +2,8 @@
 
 import app from './express.js';     // HTTP Requests run through this
 
-// seperate with the port 3000
+// the frontend is on 3000, 
+// seperate backend server start with the port 3004.
 const port = process.env.PORT || 3004;
 
 app.listen(port, (err) => {
