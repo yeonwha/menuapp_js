@@ -13,6 +13,7 @@ The base project is a console program in C++.
 
     - Complier: Visual Studio Code
     - Framework: Node.js, React, Next.js @latest
+    - Database: MongoDB, Docker Container
 
 ## How to run
 
@@ -23,6 +24,13 @@ npm run dev
 ```
 
 Second, 
+seed the initial data using Docker on the menuapp-api(menuapp_js/menuapp-api/mongodb-container) directory:
+
+```bash
+docker-compose up -d   
+```
+
+Third, 
 run the development server on the menuapp-api(menuapp_js/menuapp-api/) directory:
 
 ```bash
