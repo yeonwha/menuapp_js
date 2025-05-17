@@ -24,7 +24,7 @@ npm run dev
 ```
 
 Second, 
-seed the initial data using Docker on the menuapp-api(menuapp_js/menuapp-api/mongodb-container) directory:
+seed the initial data using Docker on the mongodb-container(menuapp_js/menuapp-api/mongodb-container) directory:
 
 ```bash
 docker-compose up -d   
