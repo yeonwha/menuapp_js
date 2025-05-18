@@ -7,7 +7,7 @@ router.route('/menu')
 .get(getAllFoods)
 .post(addNewFood)
 
-// router.route('/menu/:foodId')
-// .patch(editPrice)
+router.route('/menu/:foodId')
+.patch(editPrice)
 
 export default router;

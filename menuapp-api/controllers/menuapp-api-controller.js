@@ -63,20 +63,22 @@ const addNewFood = async (req, res) => {
     }
 };
 
-// PATCH (will be revised)
+// PATCH
 const editPrice = async (req, res) => {
     try {
-        let food = await foodSchema.validate(req.body);
-        console.log(food);
-        for (f in foodList) {
-            if (f.id === food.id) {
-                f.price = food.price;
-            }
+        let food = await foodModel.findById(req.params.foodId).exec();
+        if (!food) {
+            res.sendStatus(404);
         }
-        res.status(204).send(food);
+        else {
+            let updatedPrice = req.body.price;
+            food.price = updatedPrice;
+            await food.save();
+            res.sendStatus(204);
+        }
     }
     catch (err){
-        res.status(400).send('Bad request');
+        res.status(400).send('bad request');
     }
 }
 

@@ -6,7 +6,7 @@ export default function EditForm({ selectedItem, handleClose, setFoodList }) {
         e.preventDefault();
         const form = e.target; 
         const formData = new FormData(form);
-        editPrice(formData, setFoodList);
+        editPrice(formData, selectedItem, setFoodList);
         handleClose();
     }
    return(

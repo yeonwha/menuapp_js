@@ -17,7 +17,7 @@ async function seedDatabase() {
       { category: "Main", name: "Cheese burger", price: 11.49, checked: false },
       { category: "Main", name: "Salad", price: 14.99, checked: false },
       { category: "Dessert", name: "Chocolate icecream", price: 6.99, checked: false },
-      { category: "Dessert", name: "Vanilia cake", price: 8.49, checked: false },
+      { category: "Dessert", name: "Vanilla cake", price: 8.49, checked: false },
       { category: "Drink", name: "Zero sprite", price: 3.49, checked: false },
       { category: "Drink", name: "Ginger ale", price: 3.49, checked: false },
       { category: "Drink", name: "Cappucino", price: 2.99, checked: false },
