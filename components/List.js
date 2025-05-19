@@ -2,6 +2,7 @@ import PrimaryButton from "./Buttons/PrimaryButton";
 import DangerButton from "./Buttons/DangerButton";
 import { useState } from "react"; 
 import EditForm from "./EditForm";
+import deleteFood from "./Functions/deleteFood";
 
 /**
  * Render the array items in passed foodList, and update the list with setFoodList hook.
@@ -41,7 +42,7 @@ export default function List({foodList, setFoodList}) {
     const handleClose = () => {
         setOpenEditForm(false);
     }
-
+    
     return (
         <>
         <ol>
@@ -76,7 +77,7 @@ export default function List({foodList, setFoodList}) {
                                                 (<EditForm key="edit_price_form" selectedItem={selectedItem} handleClose={handleClose} setFoodList={setFoodList}/>)}
                                         </td>
                                         <td className="px-3 py-2">
-                                            <DangerButton onClick={() => deleteFood(selectedFood)}>
+                                            <DangerButton onClick={() => deleteFood(selectedFood, setFoodList)}>
                                                 Delete
                                             </DangerButton>
                                         </td>

@@ -15,7 +15,9 @@ const foodModel = mongoose.model('food');
 //     {id: 8, category: "Drink", name: "Cappucino", price: 2.99, checked: false},
 //   ];
 
-// GET request handler
+// GET to render all the food items from database
+// 1. Find all food models from the database collection,
+// 2. send the food list with 200 Code
 const getAllFoods = async (req, res) => {
     try {
         let foods = await foodModel.find( {}, '', {sort: {_id: -1 }}).exec();
@@ -26,7 +28,10 @@ const getAllFoods = async (req, res) => {
     }
 };
 
-// POST request handler
+// POST to create new food item
+// 1. Create a new model with request body,
+// 2. send 201 code with the created food model
+// 3. If the name not matched with the validation, send validation error (400)
 const addNewFood = async (req, res) => {
     try {
         // let food = await foodSchema.validate(req.body);
@@ -63,7 +68,11 @@ const addNewFood = async (req, res) => {
     }
 };
 
-// PATCH
+// PATCH to edit a certain food's price
+// 1. Find the food from database by the food id endpoint, 
+// 2. If no food, send 404 Not Found error,
+// 3. Else, edit the food's price in data and save,
+// 4. Send 204 (No Content) successful status code.
 const editPrice = async (req, res) => {
     try {
         let food = await foodModel.findById(req.params.foodId).exec();
@@ -82,4 +91,25 @@ const editPrice = async (req, res) => {
     }
 }
 
-export { getAllFoods, addNewFood , editPrice };
+// DELETE to delete a certain food
+// 1. Find the food from database by the food id endpoint, 
+// 2. If no food, send 404 Not Found error,
+// 3. Else, delete the food from database,
+// 4. Send 204 (No Content) successful status code.
+const deleteFood = async (req, res) => {
+    try {
+        let food = await foodModel.findById(req.params.foodId).exec();
+        if (!food) {
+            res.sendStatus(404);
+        }
+        else {
+            await food.deleteOne();
+            res.sendStatus(204);
+        }
+    }
+    catch (err){
+        res.status(400).send('bad request');
+    }
+}
+
+export { getAllFoods, addNewFood , editPrice, deleteFood };

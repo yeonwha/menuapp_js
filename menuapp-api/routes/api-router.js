@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllFoods, addNewFood, editPrice } from '../controllers/menuapp-api-controller.js';
+import { getAllFoods, addNewFood, editPrice, deleteFood } from '../controllers/menuapp-api-controller.js';
 
 const router = express.Router();
 
@@ -9,5 +9,6 @@ router.route('/menu')
 
 router.route('/menu/:foodId')
 .patch(editPrice)
+.delete(deleteFood)
 
 export default router;
