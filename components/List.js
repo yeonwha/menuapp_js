@@ -62,10 +62,10 @@ export default function List({foodList, setFoodList}) {
                                 <tr key={selectedFood.id}>
                                     <td>
                                         <input type="checkbox" name={selectedFood.name + selectedFood.id} id={index} 
-                                             onChange={() => handleClick(selectedFood)}/>
+                                            checked= {selectedFood.checked} onChange={() => handleClick(selectedFood)}/>
                                     </td>
                                     <td className="px-3 py-2">{selectedFood.name}</td>
-                                    <td className="px-3 py-2">{selectedFood.price}</td>
+                                    <td className="px-3 py-2">{selectedFood.price.toFixed(2)}</td>
                                         <td className="px-3 py-2">
                                             <PrimaryButton 
                                                 className="font-semibold bg-green-600" 

@@ -39,7 +39,7 @@ export default function Home({ jsonData }) {
           <List key={() => (foodList.length + 1)} foodList={foodList} setFoodList={setFoodList}/>
           </div>
           <div className="flex justify-center">
-          <DiscountSelect ket={() => (foodList.length + 1)} foodList={foodList}/>
+          <DiscountSelect ket={() => (foodList.length + 1)} foodList={foodList} setFoodList={setFoodList}/>
           </div>
         </main>
         <Footer />

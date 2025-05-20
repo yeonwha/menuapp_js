@@ -15,7 +15,7 @@ const foodSchema = new mongoose.Schema({
         required: true,
         trim: true,
         minLength: 2,
-        maxLength: 15,
+        maxLength: 30,
         match: /^[A-Za-z0-9 ]+$/
     },
     price: {
@@ -36,7 +36,11 @@ foodSchema.set('toJSON', {
     transform: (doc, ret) => { delete ret._id; }
 });
 
-export default mongoose.model('food', foodSchema);
+const foodModel = mongoose.model('food', foodSchema); // Define and register the model
+
+export default foodModel;
+
+//export default mongoose.model('food', foodSchema);
 
 // const foodSchema = yup.object().shape({
 //     category: yup

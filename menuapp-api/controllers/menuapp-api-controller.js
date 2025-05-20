@@ -1,7 +1,8 @@
+
 import mongoose from "mongoose";
 
-const foodModel = mongoose.model('food');
-//import foodSchema from "../models/food-schema.js";
+// const foodModel = mongoose.model('food');
+import foodModel from "../models/food-schema.js";
 
 // Initial temporary data to send to the frontend (before database setup)
 // const foodList = [
@@ -20,7 +21,7 @@ const foodModel = mongoose.model('food');
 // 2. send the food list with 200 Code
 const getAllFoods = async (req, res) => {
     try {
-        let foods = await foodModel.find( {}, '', {sort: {_id: -1 }}).exec();
+        let foods = await foodModel.find( {}, '', { sort: { _id: -1 } }).exec();
         res.status(200).send(foods);
     } 
     catch (err) {
@@ -92,7 +93,7 @@ const editPrice = async (req, res) => {
 }
 
 // DELETE to delete a certain food
-// 1. Find the food from database by the food id endpoint, 
+// 1. Find the food from database with the food id endpoint, 
 // 2. If no food, send 404 Not Found error,
 // 3. Else, delete the food from database,
 // 4. Send 204 (No Content) successful status code.
@@ -112,4 +113,52 @@ const deleteFood = async (req, res) => {
     }
 }
 
-export { getAllFoods, addNewFood , editPrice, deleteFood };
+// PATCH to update checked foods' price
+const applyDiscount = async (req, res) => {
+    try {
+        const { rate, foodIds } = req.body;
+
+        if (!Array.isArray(foodIds) || foodIds.length === 0) {
+            return res.status(400).json({ message: 'No food items selected for discount.' });
+        }
+        const discountMultiplier = 1 - rate;
+        const  query = {
+            _id: { $in: foodIds.map(id => new mongoose.Types.ObjectId(id)) } // Convert string IDs to ObjectId
+        };
+        const update = [{
+            $set: {
+                    price: {
+                        $max: [
+                            0.1,
+                            { $multiply: ['$price', discountMultiplier] }
+                        ]
+                    },
+                    checked: false 
+                }
+        }];
+        const updated = await foodModel.updateMany(query, update, { runValidators: true });
+        if (updated.matchedCount === 0) {
+            return res.status(404).send('No checked foods found to apply discount.');
+        }
+        else {
+            res.status(200).json({
+                message: `Discount applied to ${updated.modifiedCount} foods.`,
+                matchedCount: updated.matchedCount,
+                modifiedCount: updated.modifiedCount
+            });
+        }
+    }
+    catch (err) {
+        console.error("Error applying discount:", err);
+        if (err.name === 'ValidationError') {
+            const errors = {};
+            for (const field in err.errors) {
+                errors[field] = err.errors[field].message;
+            }
+            return res.status(400).json({ message: 'Validation Error during discount application', errors });
+        }
+        res.status(500).send('Server Error applying discount.');
+    }
+}
+
+export { getAllFoods, addNewFood , editPrice, deleteFood, applyDiscount };
