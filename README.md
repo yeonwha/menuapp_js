@@ -14,6 +14,7 @@ The base project is a console program in C++.
     - Complier: Visual Studio Code
     - Framework: Node.js, React, Next.js @latest
     - Database: MongoDB, Docker Container
+    - Browser: Firefox Developer Edition recommended
 
 ## How to run
 
