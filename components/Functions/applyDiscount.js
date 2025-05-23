@@ -1,5 +1,13 @@
 import axios from "axios";
 
+/**
+ * PATCH calling function to apply discount rate for multiple food items
+ * It sends a patch call including selected food ids list and discount rate as a request body
+ * then render the updated food list to the main page
+ * @param {*} formData
+ * @param {*} selectedFoodIds
+ * @param {*} setFoodList 
+ */
 export default async function applyDiscount( formData, selectedFoodIds, setFoodList ){
     try {
         let discountRate = parseFloat(formData.get("discount_rate"));
@@ -9,8 +17,8 @@ export default async function applyDiscount( formData, selectedFoodIds, setFoodL
             foodIds: selectedFoodIds
         }
         
-        await axios.patch(`http://192.168.0.14:3004/m1/menu/discount`, request);
-        const updatedFoodList = await axios.get('http://192.168.0.14:3004/m1/menu');
+        await axios.patch(`http://localhost:3004/m1/menu/discount`, request);
+        const updatedFoodList = await axios.get('http://localhost:3004/m1/menu');
         setFoodList(updatedFoodList.data);
     }
     catch (err) {

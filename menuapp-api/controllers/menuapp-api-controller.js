@@ -1,20 +1,7 @@
 
 import mongoose from "mongoose";
 
-// const foodModel = mongoose.model('food');
 import foodModel from "../models/food-schema.js";
-
-// Initial temporary data to send to the frontend (before database setup)
-// const foodList = [
-//     {id: 1, category: "Main", name: "Pasta", price: 21.99, checked: false },
-//     {id: 2, category: "Main", name: "Cheese burger", price: 11.49, checked: false},
-//     {id: 3, category: "Main", name: "Salad", price: 14.99, checked: false},
-//     {id: 4, category: "Dessert", name: "Chocolate icecream", price: 6.99, checked: false},
-//     {id: 5, category: "Dessert", name: "Vanilia cake", price: 8.49, checked: false},
-//     {id: 6, category: "Drink", name: "Zero sprite", price: 3.49, checked: false},
-//     {id: 7, category: "Drink", name: "Ginger ale", price: 3.49, checked: false},
-//     {id: 8, category: "Drink", name: "Cappucino", price: 2.99, checked: false},
-//   ];
 
 // GET to render all the food items from database
 // 1. Find all food models from the database collection,
@@ -30,22 +17,11 @@ const getAllFoods = async (req, res) => {
 };
 
 // POST to create new food item
-// 1. Create a new model with request body,
+// 1. Create a new model as request body,
 // 2. send 201 code with the created food model
 // 3. If the name not matched with the validation, send validation error (400)
 const addNewFood = async (req, res) => {
     try {
-        // let food = await foodSchema.validate(req.body);
-        // foodId++;
-        // const newFood = {
-        //     id: foodId, 
-        //     category: food.category, 
-        //     name: food.name, 
-        //     price: food.price, 
-        //     checked: false
-        // };
-        // foodList.push(newFood);
-        // console.log(req.body);
         let newFood = await foodModel.create(req.body);
 
         res.status(201).json(newFood);
@@ -71,9 +47,10 @@ const addNewFood = async (req, res) => {
 
 // PATCH to edit a certain food's price
 // 1. Find the food from database by the food id endpoint, 
-// 2. If no food, send 404 Not Found error,
+// 2. If no food found, send 404 Not Found error,
 // 3. Else, edit the food's price in data and save,
 // 4. Send 204 (No Content) successful status code.
+// 5. other errors, send 400 Bad request.
 const editPrice = async (req, res) => {
     try {
         let food = await foodModel.findById(req.params.foodId).exec();
@@ -88,15 +65,16 @@ const editPrice = async (req, res) => {
         }
     }
     catch (err){
-        res.status(400).send('bad request');
+        res.status(400).send('Bad request');
     }
 }
 
-// DELETE to delete a certain food
+// DELETE to delete a certain food item
 // 1. Find the food from database with the food id endpoint, 
-// 2. If no food, send 404 Not Found error,
+// 2. If no food found, send 404 Not Found error,
 // 3. Else, delete the food from database,
 // 4. Send 204 (No Content) successful status code.
+// 5. Other errors, send 400 Bad request.
 const deleteFood = async (req, res) => {
     try {
         let food = await foodModel.findById(req.params.foodId).exec();
@@ -109,20 +87,22 @@ const deleteFood = async (req, res) => {
         }
     }
     catch (err){
-        res.status(400).send('bad request');
+        res.status(400).send('Bad request');
     }
 }
 
 // PATCH to update checked foods' price
+// 1. decontruct the received request body into rate and food ids to update
+// 2. mapping only selected foods' id from database (query to filter)
+// 3. Apply discount rate by multiplying the discount rate with the current price
+// 4. if no food is updated, send 404 (No checked food to update)
+// 5. else, send 200 with the number of updated foods
 const applyDiscount = async (req, res) => {
     try {
         const { rate, foodIds } = req.body;
 
-        if (!Array.isArray(foodIds) || foodIds.length === 0) {
-            return res.status(400).json({ message: 'No food items selected for discount.' });
-        }
         const discountMultiplier = 1 - rate;
-        const  query = {
+        const query = {
             _id: { $in: foodIds.map(id => new mongoose.Types.ObjectId(id)) } // Convert string IDs to ObjectId
         };
         const update = [{

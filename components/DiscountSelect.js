@@ -2,6 +2,9 @@ import applyDiscount from "./Functions/applyDiscount";
 import PrimaryButton from "./Buttons/PrimaryButton"
 
  export default function DiscountSelect({ foodList, setFoodList }) {
+    // Apply discount form handler
+    // send discount rate and selected food ids list to applyDiscount function for PATCH
+    // Call applyDiscount function only if there's selected food item
     function handleDiscountSumbit(e){
         e.preventDefault();
         const form = e.target; 
@@ -12,6 +15,7 @@ import PrimaryButton from "./Buttons/PrimaryButton"
             applyDiscount(formData, checkedFoodIds, setFoodList);
         }
     }
+
     return(
     <>
     <div className="discount_select_form border-2 border-gray-200 rounded-lg p-6 max-w-4xl mx-2 items-center">
@@ -24,7 +28,7 @@ import PrimaryButton from "./Buttons/PrimaryButton"
                     {foodList.map((food) => <p key={food.id}>{food.checked ? food.name : ""}</p>)}
                 </div>
             </div>
-            {/* Discount % */}
+            {/* Discount rate % */}
             <div className="w-full max-w-96 mb-6">
                 <label htmlFor="discount_rate" className="block mb-2 text-lg font-medium text-gray-900">Discount Rate</label>
                 <input 

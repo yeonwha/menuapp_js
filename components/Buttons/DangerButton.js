@@ -1,3 +1,4 @@
+// Delete button
 export default function DangerButton({ className = '', disabled, children, ...props }) {
     return (
         <button

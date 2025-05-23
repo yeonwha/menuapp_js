@@ -1,10 +1,18 @@
 import axios from "axios";
 
+/**
+ * PATCH calling function to update a food's price
+ * send new price data routing the selected food's id endpoint
+ * then render the updated food list
+ * @param {*} formData 
+ * @param {*} selectedItem 
+ * @param {*} setFoodList 
+ */
 export default async function editPrice( formData, selectedItem, setFoodList ){
     try {
         let updatedPrice = { "price": formData.get("food_price") };
-        await axios.patch(`http://192.168.0.14:3004/m1/menu/${selectedItem.id}`, updatedPrice);
-        const updatedFoodList = await axios.get('http://192.168.0.14:3004/m1/menu');
+        await axios.patch(`http://localhost:3004/m1/menu/${selectedItem.id}`, updatedPrice);
+        const updatedFoodList = await axios.get('http://localhost:3004/m1/menu');
         setFoodList(updatedFoodList.data);
     }
     catch (err) {

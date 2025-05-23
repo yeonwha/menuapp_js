@@ -8,6 +8,7 @@ import compression from 'compression';     // server can accept compressed file
 import morgan from 'morgan';     // data logger to log responese and request in the console
 import cors from 'cors';         // enables CORS for API from different domain, protocol, port access API
 
+// import router to navigate the endpoints
 import router from './routes/api-router.js';
 
 const app = express();
@@ -23,7 +24,7 @@ app.use(express.json());
 
 // Routing
 app.get('/', (req, res) => {
-    res.send('Node.js Server is live!');
+    res.send('The Server is working!');
 });
 
 // Callback to any HTTP requests
